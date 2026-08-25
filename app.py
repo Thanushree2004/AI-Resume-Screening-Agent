@@ -1,39 +1,44 @@
-from src.resume_parser import extract_resume_text
-from src.extractor import extract_resume_information
+from src.jd_parser import (
+    load_job_description,
+    extract_job_description
+)
 
 
 def main():
-    resume_path = "data/sample_resumes/sample_resume.txt"
+
+    jd_path = "data/job_description.txt"
 
     try:
-        resume_text = extract_resume_text(resume_path)
+        # Load the Job Description
+        jd_text = load_job_description(jd_path)
 
-        resume_data = extract_resume_information(resume_text)
+        # Extract structured information
+        job_data = extract_job_description(jd_text)
 
         print("\n" + "=" * 60)
-        print("AI RESUME SCREENING AGENT")
+        print("JOB DESCRIPTION ANALYZER")
         print("=" * 60)
 
-        print("\nNAME:")
-        print(resume_data["name"])
-
-        print("\nEMAIL:")
-        print(resume_data["email"])
-
-        print("\nSKILLS:")
-        print(resume_data["skills"])
+        print("\nJOB TITLE:")
+        print(job_data["job_title"])
 
         print("\nEDUCATION:")
-        print(resume_data["education"])
+        print(job_data["education"])
 
-        print("\nPROJECTS:")
-        print(resume_data["projects"])
+        print("\nREQUIRED SKILLS:")
+        print(job_data["required_skills"])
+
+        print("\nPREFERRED SKILLS:")
+        print(job_data["preferred_skills"])
 
         print("\nEXPERIENCE:")
-        print(resume_data["experience"])
+        print(job_data["experience"])
+
+        print("\nRESPONSIBILITIES:")
+        print(job_data["responsibilities"])
 
         print("\n" + "=" * 60)
-        print("RESUME INFORMATION EXTRACTION SUCCESSFUL")
+        print("JOB DESCRIPTION PARSING SUCCESSFUL")
         print("=" * 60)
 
     except Exception as error:

@@ -1,0 +1,39 @@
+Junior Python Developer
+
+JOB DESCRIPTION
+
+We are looking for a Junior Python Developer to join our software development team.
+
+EDUCATION
+Bachelor's degree in Computer Science, Information Technology, Software Engineering, or a related field.
+
+REQUIRED SKILLS
+Python
+SQL
+Git
+REST API
+Flask
+Django
+HTML
+CSS
+JavaScript
+
+PREFERRED SKILLS
+Linux
+Docker
+AWS
+Machine Learning
+Data Structures and Algorithms
+
+EXPERIENCE
+0-2 years of experience in software development.
+Freshers with strong Python projects and relevant internship experience can apply.
+
+RESPONSIBILITIES
+- Develop and maintain Python applications.
+- Build and consume REST APIs.
+- Work with SQL databases.
+- Write clean and maintainable code.
+- Debug and test software applications.
+- Collaborate with other developers.
+- Use Git for version control.
