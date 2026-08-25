@@ -1,0 +1,35 @@
+JOB TITLE
+Junior Python Developer
+
+JOB DESCRIPTION
+We are looking for a motivated Junior Python Developer to join our software development team.
+
+REQUIRED SKILLS
+Python
+SQL
+Git
+REST API
+Flask
+HTML
+CSS
+JavaScript
+
+PREFERRED SKILLS
+Docker
+Linux
+AWS
+Machine Learning
+
+EDUCATION
+Bachelor's degree in Computer Science, Information Technology, or a related field.
+
+EXPERIENCE
+0-2 years of experience in software development.
+
+RESPONSIBILITIES
+Develop and maintain Python applications.
+Build and integrate REST APIs.
+Work with SQL databases.
+Write clean and maintainable code.
+Use Git for version control.
+Collaborate with other developers.

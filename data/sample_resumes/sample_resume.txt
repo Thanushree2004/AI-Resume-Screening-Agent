@@ -1,0 +1,23 @@
+THANUSHREE S K
+
+Email: thanushree@example.com
+Location: Bengaluru, India
+
+EDUCATION
+Bachelor of Engineering in Computer Science and Engineering
+
+SKILLS
+Python, Java, JavaScript, SQL, Flask, HTML, CSS, Git, Linux,
+Cybersecurity, Networking, Nmap, Wireshark, Burp Suite
+
+PROJECTS
+AI Resume Screening Agent
+Developed a Python-based application for analyzing resumes
+and matching candidates with job descriptions.
+
+Basic Cryptography Demonstrator
+Developed a Flask-based web application demonstrating
+classical and modern cryptography techniques.
+
+EXPERIENCE
+Fresher with internship experience in Android application development.
