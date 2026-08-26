@@ -1,0 +1,16 @@
+NEHA SINGH
+
+Email: neha.singh@example.com
+
+EDUCATION
+Bachelor of Engineering in Computer Science and Engineering
+
+SKILLS
+Python, Django, REST API, SQL, Git, JavaScript, HTML, CSS, Linux
+
+PROJECTS
+Developed a Django REST API for an online shopping application.
+Implemented SQL database operations and user authentication.
+
+EXPERIENCE
+1 year internship experience in backend development.

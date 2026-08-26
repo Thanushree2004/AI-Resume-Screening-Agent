@@ -1,0 +1,16 @@
+ADITYA VERMA
+
+Email: aditya.verma@example.com
+
+EDUCATION
+Bachelor of Technology in Information Technology
+
+SKILLS
+Java, JavaScript, React, Node.js, MongoDB, Git, HTML, CSS
+
+PROJECTS
+Built a full-stack web application using React and Node.js.
+Created REST APIs and MongoDB database integration.
+
+EXPERIENCE
+1 year internship in full-stack development.

@@ -1,0 +1,16 @@
+PRIYA REDDY
+
+Email: priya.reddy@example.com
+
+EDUCATION
+Bachelor of Engineering in Information Technology
+
+SKILLS
+Python, SQL, Git, HTML, CSS, JavaScript, Flask, REST API, Docker, AWS
+
+PROJECTS
+Built a Python web application using Flask and REST APIs.
+Created a Dockerized application and deployed it on AWS.
+
+EXPERIENCE
+6 months internship experience in software development.

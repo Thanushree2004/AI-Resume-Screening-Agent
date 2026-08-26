@@ -1,0 +1,16 @@
+VIKRAM PATEL
+
+Email: vikram.patel@example.com
+
+EDUCATION
+Bachelor of Engineering in Electronics and Communication Engineering
+
+SKILLS
+C++, Embedded C, Linux, Python, Git
+
+PROJECTS
+Developed embedded systems using C and microcontrollers.
+Created Python scripts for testing hardware components.
+
+EXPERIENCE
+2 years experience in embedded systems.

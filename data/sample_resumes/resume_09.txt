@@ -1,0 +1,16 @@
+KAVYA NAIR
+
+Email: kavya.nair@example.com
+
+EDUCATION
+Bachelor of Engineering in Computer Science
+
+SKILLS
+Python, Java, SQL, Flask, REST API, Git, JavaScript, Linux
+
+PROJECTS
+Built a Flask REST API for an employee management system.
+Implemented authentication and SQL database integration.
+
+EXPERIENCE
+8 months internship in Python development.

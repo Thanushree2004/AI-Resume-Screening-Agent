@@ -1,0 +1,16 @@
+ANANYA IYER
+
+Email: ananya.iyer@example.com
+
+EDUCATION
+Bachelor of Computer Applications
+
+SKILLS
+Python, SQL, JavaScript, HTML, CSS, Git, Flask
+
+PROJECTS
+Created a Flask-based student management system.
+Implemented SQL database operations and a JavaScript frontend.
+
+EXPERIENCE
+Fresher with software development internship.

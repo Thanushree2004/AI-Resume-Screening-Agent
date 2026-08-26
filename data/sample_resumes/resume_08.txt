@@ -1,0 +1,16 @@
+ROHAN MEHTA
+
+Email: rohan.mehta@example.com
+
+EDUCATION
+Bachelor of Engineering in Mechanical Engineering
+
+SKILLS
+Python, SQL, Linux, Git, AWS, Docker
+
+PROJECTS
+Created Python automation scripts.
+Built Docker containers for development environments.
+
+EXPERIENCE
+Fresher.

@@ -1,0 +1,16 @@
+RAHUL KUMAR
+
+Email: rahul.kumar@example.com
+
+EDUCATION
+Bachelor of Technology in Computer Science
+
+SKILLS
+Java, Python, SQL, Git, Linux, HTML, CSS
+
+PROJECTS
+Developed Java applications using SQL databases.
+Created a basic Python automation project.
+
+EXPERIENCE
+Fresher.

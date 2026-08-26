@@ -1,0 +1,17 @@
+SNEHA KUMAR
+
+Email: sneha.kumar@example.com
+
+EDUCATION
+Bachelor of Engineering in Computer Science
+
+SKILLS
+Python, SQL, Flask, Git, Linux, JavaScript, HTML, CSS, REST API, Django
+
+PROJECTS
+Developed a Flask-based inventory management application.
+Created REST APIs and integrated SQL databases.
+Built a Django project with user authentication.
+
+EXPERIENCE
+1 year internship experience in Python and web development.

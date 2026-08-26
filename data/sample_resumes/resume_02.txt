@@ -1,0 +1,16 @@
+ARJUN SHARMA
+
+Email: arjun.sharma@example.com
+
+EDUCATION
+Bachelor of Engineering in Computer Science and Engineering
+
+SKILLS
+Python, SQL, Flask, Django, REST API, Git, JavaScript, HTML, CSS, Linux
+
+PROJECTS
+Developed a Python Flask REST API with SQL database integration.
+Built a Django web application with authentication.
+
+EXPERIENCE
+1 year internship experience in Python development.
