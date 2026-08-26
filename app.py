@@ -22,59 +22,75 @@ from src.scorer import (
 
 from src.ranker import rank_candidates
 
+from src.ai_reasoning import (
+    generate_candidate_reasoning
+)
+
 
 def process_resume(
     resume_path,
     job_description_text,
     job_data
 ):
-    """
-    Process one resume and calculate its complete score.
-    """
+    """Process one resume and calculate all scores."""
 
-    resume_text = extract_resume_text(
-        resume_path
-    )
+    resume_text = extract_resume_text(resume_path)
 
     resume_data = extract_resume_information(
         resume_text
     )
 
+    # -------------------------------------------------
     # NLP similarity
+    # -------------------------------------------------
+
     similarity_score = calculate_text_similarity(
         resume_text,
         job_description_text
     )
 
-    # Skill matching
+    # -------------------------------------------------
+    # Required skill matching
+    # -------------------------------------------------
+
     skill_result = calculate_skill_match(
         resume_data["skills"],
         job_data["required_skills"]
     )
 
-    skill_score = skill_result[
-        "match_percentage"
-    ]
+    skill_score = skill_result["match_percentage"]
 
+    # -------------------------------------------------
     # Education
+    # -------------------------------------------------
+
     education_score = calculate_education_score(
         resume_data["education"],
         job_data["education"]
     )
 
+    # -------------------------------------------------
     # Experience
+    # -------------------------------------------------
+
     experience_score = calculate_experience_score(
         resume_data["experience"],
         job_data["experience"]
     )
 
+    # -------------------------------------------------
     # Projects
+    # -------------------------------------------------
+
     project_score = calculate_project_score(
         resume_data["projects"],
         job_description_text
     )
 
+    # -------------------------------------------------
     # Final score
+    # -------------------------------------------------
+
     final_score = calculate_final_score(
         skill_score,
         similarity_score,
@@ -108,6 +124,10 @@ def process_resume(
 
 def main():
 
+    # -------------------------------------------------
+    # File paths
+    # -------------------------------------------------
+
     jd_path = "data/job_description.txt"
 
     resume_folder = Path(
@@ -116,9 +136,9 @@ def main():
 
     try:
 
-        # -------------------------------------------------
+        # =================================================
         # 1. Load Job Description
-        # -------------------------------------------------
+        # =================================================
 
         jd_text = load_job_description(
             jd_path
@@ -128,9 +148,17 @@ def main():
             jd_text
         )
 
-        # -------------------------------------------------
+        print("\n" + "=" * 70)
+        print("AI RESUME SCREENING AGENT")
+        print("=" * 70)
+
+        print(
+            f"\nJob: {job_data['job_title']}"
+        )
+
+        # =================================================
         # 2. Find Resume Files
-        # -------------------------------------------------
+        # =================================================
 
         resume_files = []
 
@@ -139,16 +167,13 @@ def main():
             "*.docx",
             "*.txt"
         ]:
-
             resume_files.extend(
                 resume_folder.glob(extension)
             )
 
         if not resume_files:
 
-            print(
-                "No resume files found."
-            )
+            print("\nNo resume files found.")
 
             return
 
@@ -156,16 +181,17 @@ def main():
             f"\nFound {len(resume_files)} resume(s)."
         )
 
-        # -------------------------------------------------
-        # 3. Process Resumes
-        # -------------------------------------------------
+        # =================================================
+        # 3. Process All Resumes
+        # =================================================
 
         candidates = []
 
         for resume_path in resume_files:
 
             print(
-                f"\nProcessing: {resume_path.name}"
+                f"\nProcessing: "
+                f"{resume_path.name}"
             )
 
             try:
@@ -181,82 +207,102 @@ def main():
                 )
 
                 print(
-                    f"Score: {candidate['final_score']}/100"
+                    f"Score: "
+                    f"{candidate['final_score']}/100"
                 )
 
             except Exception as error:
 
                 print(
                     f"Failed to process "
-                    f"{resume_path.name}: {error}"
+                    f"{resume_path.name}: "
+                    f"{error}"
                 )
 
-        # -------------------------------------------------
+        # =================================================
         # 4. Rank Candidates
-        # -------------------------------------------------
+        # =================================================
 
         ranked_candidates = rank_candidates(
             candidates
         )
 
-        # -------------------------------------------------
-        # 5. Display Ranking
-        # -------------------------------------------------
-
-        print("\n" + "=" * 70)
-        print("AI RESUME SCREENING - RANKED CANDIDATES")
-        print("=" * 70)
+        # =================================================
+        # 5. Generate Candidate Reasoning
+        # =================================================
 
         print(
-            f"\nJob: {job_data['job_title']}"
+            "\nGenerating candidate reasoning..."
         )
-
-        print("\n")
 
         for candidate in ranked_candidates:
 
             print(
-                f"#{candidate['rank']} "
-                f"{candidate['name']} "
-                f"- {candidate['final_score']}/100"
+                f"Analyzing: "
+                f"{candidate['name']}"
+            )
+
+            reasoning, reasoning_source = (
+                generate_candidate_reasoning(
+                    candidate,
+                    jd_text
+                )
+            )
+
+            candidate["reasoning"] = reasoning
+
+            candidate["reasoning_source"] = (
+                reasoning_source
+            )
+
+        # =================================================
+        # 6. Display Final Ranking
+        # =================================================
+
+        print("\n" + "=" * 70)
+        print("FINAL RANKED CANDIDATES")
+        print("=" * 70)
+
+        for candidate in ranked_candidates:
+
+            print(
+                f"\n#{candidate['rank']} "
+                f"{candidate['name']}"
             )
 
             print(
-                f"   Skills: "
-                f"{candidate['skill_score']}%"
+                f"Score: "
+                f"{candidate['final_score']}/100"
             )
 
             print(
-                f"   NLP: "
-                f"{candidate['nlp_score']}%"
-            )
-
-            print(
-                f"   Education: "
-                f"{candidate['education_score']}%"
-            )
-
-            print(
-                f"   Experience: "
-                f"{candidate['experience_score']}%"
-            )
-
-            print(
-                f"   Projects: "
-                f"{candidate['project_score']}%"
-            )
-
-            print(
-                f"   Matched: "
+                f"Matched Skills: "
                 f"{candidate['matched_skills']}"
             )
 
             print(
-                f"   Missing: "
+                f"Missing Skills: "
                 f"{candidate['missing_skills']}"
             )
 
+            print(
+                f"\nReasoning Source: "
+                f"{candidate['reasoning_source']}"
+            )
+
+            print(
+                "\nRECRUITMENT ASSESSMENT:"
+            )
+
+            print(
+                candidate["reasoning"]
+            )
+
             print("-" * 70)
+
+        # =================================================
+        # 7. Final Summary
+        # =================================================
 
         print(
             f"\nProcessed "
@@ -265,7 +311,19 @@ def main():
         )
 
         print(
-            "\nRANKING SUCCESSFUL"
+            "\nSCREENING COMPLETED SUCCESSFULLY"
+        )
+
+        print(
+            "\nReasoning can be generated using:"
+        )
+
+        print(
+            "  • LLM reasoning when API access is available"
+        )
+
+        print(
+            "  • Rule-based fallback when API quota is unavailable"
         )
 
     except Exception as error:
