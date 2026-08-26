@@ -26,6 +26,11 @@ from src.ai_reasoning import (
     generate_candidate_reasoning
 )
 
+from src.exporter import (
+    export_to_csv,
+    export_to_json
+)
+
 
 def process_resume(
     resume_path,
@@ -34,7 +39,9 @@ def process_resume(
 ):
     """Process one resume and calculate all scores."""
 
-    resume_text = extract_resume_text(resume_path)
+    resume_text = extract_resume_text(
+        resume_path
+    )
 
     resume_data = extract_resume_information(
         resume_text
@@ -58,7 +65,9 @@ def process_resume(
         job_data["required_skills"]
     )
 
-    skill_score = skill_result["match_percentage"]
+    skill_score = skill_result[
+        "match_percentage"
+    ]
 
     # -------------------------------------------------
     # Education
@@ -134,6 +143,10 @@ def main():
         "data/sample_resumes"
     )
 
+    output_folder = Path(
+        "outputs"
+    )
+
     try:
 
         # =================================================
@@ -162,11 +175,12 @@ def main():
 
         resume_files = []
 
-        for extension in [
+        for extension in (
             "*.pdf",
             "*.docx",
             "*.txt"
-        ]:
+        ):
+
             resume_files.extend(
                 resume_folder.glob(extension)
             )
@@ -219,6 +233,14 @@ def main():
                     f"{error}"
                 )
 
+        if not candidates:
+
+            print(
+                "\nNo candidates could be processed."
+            )
+
+            return
+
         # =================================================
         # 4. Rank Candidates
         # =================================================
@@ -256,7 +278,31 @@ def main():
             )
 
         # =================================================
-        # 6. Display Final Ranking
+        # 6. Export Results
+        # =================================================
+
+        csv_path = (
+            output_folder
+            / "ranked_candidates.csv"
+        )
+
+        json_path = (
+            output_folder
+            / "ranked_candidates.json"
+        )
+
+        export_to_csv(
+            ranked_candidates,
+            csv_path
+        )
+
+        export_to_json(
+            ranked_candidates,
+            json_path
+        )
+
+        # =================================================
+        # 7. Display Final Ranking
         # =================================================
 
         print("\n" + "=" * 70)
@@ -286,7 +332,7 @@ def main():
             )
 
             print(
-                f"\nReasoning Source: "
+                f"Reasoning Source: "
                 f"{candidate['reasoning_source']}"
             )
 
@@ -301,7 +347,7 @@ def main():
             print("-" * 70)
 
         # =================================================
-        # 7. Final Summary
+        # 8. Final Summary
         # =================================================
 
         print(
@@ -311,19 +357,19 @@ def main():
         )
 
         print(
+            "\nResults exported successfully:"
+        )
+
+        print(
+            f"CSV : {csv_path}"
+        )
+
+        print(
+            f"JSON: {json_path}"
+        )
+
+        print(
             "\nSCREENING COMPLETED SUCCESSFULLY"
-        )
-
-        print(
-            "\nReasoning can be generated using:"
-        )
-
-        print(
-            "  • LLM reasoning when API access is available"
-        )
-
-        print(
-            "  • Rule-based fallback when API quota is unavailable"
         )
 
     except Exception as error:
