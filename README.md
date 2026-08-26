@@ -1,29 +1,107 @@
-Absolutely. For a **professional GitHub submission**, I would make the README more polished and concise rather than making it look like a collection of instructions.
-
-Use the following as your **final `README.md`**:
-
 ````markdown
 # AI Resume Screening Agent
 
-An AI-assisted resume screening system that automates candidate evaluation against a Job Description (JD). The system extracts information from resumes, performs skill and NLP-based matching, calculates a weighted suitability score, ranks candidates, and generates recruitment assessments.
+An AI-assisted Resume Screening Agent that automates candidate evaluation against a Job Description (JD). The system parses resumes, extracts candidate information, performs skill and NLP-based matching, calculates a weighted suitability score, ranks candidates, and generates recruitment assessments.
 
-## Key Features
+## Quick Start
 
-- Resume parsing for TXT, PDF, and DOCX files
-- Candidate information extraction
-- Job Description parsing
-- Required skill matching
-- TF-IDF and cosine similarity-based NLP matching
-- Education compatibility analysis
-- Experience compatibility analysis
-- Project relevance analysis
-- Weighted candidate scoring
-- Batch screening of 10+ resumes
-- Candidate ranking
-- AI-assisted recruitment reasoning
-- Rule-based fallback when LLM services are unavailable
-- CSV and JSON result generation
-- Automated testing with pytest
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Thanushree2004/AI-Resume-Screening-Agent.git
+cd AI-Resume-Screening-Agent
+````
+
+### 2. Create a Virtual Environment
+
+Windows PowerShell:
+
+```powershell
+python -m venv venv
+venv\Scripts\Activate.ps1
+```
+
+Windows Command Prompt:
+
+```cmd
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+
+```powershell
+pip install -r requirements.txt
+```
+
+### 4. Run the Application
+
+```powershell
+python app.py
+```
+
+The application automatically processes the Job Description and all supported resumes in `data/sample_resumes/`.
+
+### 5. View the Results
+
+After execution, the ranked results are generated in:
+
+```text
+outputs/
+├── ranked_candidates.csv
+└── ranked_candidates.json
+```
+
+### 6. Run Tests
+
+```powershell
+python -m pytest
+```
+
+Expected result:
+
+```text
+7 passed
+```
+
+> **Note:** An OpenAI API key is optional for the core screening pipeline. If LLM access is unavailable or the API quota is exhausted, the application automatically uses its rule-based reasoning fallback.
+
+---
+
+## Features
+
+* Resume parsing for TXT, PDF, and DOCX files
+* Candidate information extraction
+* Job Description parsing
+* Required skill matching
+* TF-IDF and cosine similarity-based NLP matching
+* Education compatibility analysis
+* Experience compatibility analysis
+* Project relevance analysis
+* Weighted candidate scoring
+* Batch screening of 10+ resumes
+* Candidate ranking
+* AI-assisted recruitment reasoning
+* Rule-based reasoning fallback
+* CSV output generation
+* JSON output generation
+* Automated testing with pytest
+
+---
+
+## Technology Stack
+
+| Category             | Technology                |
+| -------------------- | ------------------------- |
+| Programming Language | Python                    |
+| NLP                  | TF-IDF, Cosine Similarity |
+| Document Processing  | TXT, PDF, DOCX            |
+| AI                   | OpenAI API                |
+| Testing              | Pytest                    |
+| Data Output          | CSV, JSON                 |
+| Version Control      | Git, GitHub               |
+
+---
 
 ## Project Structure
 
@@ -55,17 +133,9 @@ AI-Resume-Screening-Agent/
 ├── requirements.txt
 ├── README.md
 └── .gitignore
-````
+```
 
-## Technology Stack
-
-* **Language:** Python
-* **NLP:** TF-IDF, Cosine Similarity
-* **Document Processing:** PDF, DOCX, TXT
-* **AI:** OpenAI API with rule-based fallback
-* **Testing:** Pytest
-* **Output:** CSV, JSON
-* **Version Control:** Git and GitHub
+---
 
 ## Requirements
 
@@ -74,47 +144,41 @@ AI-Resume-Screening-Agent/
 * Git
 * Optional OpenAI API access for LLM-based reasoning
 
+---
+
 ## Installation
 
-### 1. Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone https://github.com/Thanushree2004/AI-Resume-Screening-Agent.git
 ```
 
-### 2. Navigate to the Project
+Navigate to the project:
 
 ```bash
 cd AI-Resume-Screening-Agent
 ```
 
-### 3. Create a Virtual Environment
-
-Windows:
+Create a virtual environment:
 
 ```powershell
 python -m venv venv
 ```
 
-### 4. Activate the Virtual Environment
-
-PowerShell:
+Activate the environment:
 
 ```powershell
 venv\Scripts\Activate.ps1
 ```
 
-Command Prompt:
-
-```cmd
-venv\Scripts\activate
-```
-
-### 5. Install Dependencies
+Install the required packages:
 
 ```powershell
 pip install -r requirements.txt
 ```
+
+---
 
 ## Configuration
 
@@ -126,44 +190,31 @@ Create a `.env` file in the project root:
 OPENAI_API_KEY=your_api_key_here
 ```
 
-The API key should never be committed to the repository.
+The API key should never be committed to GitHub.
 
-The application includes a rule-based fallback, allowing the core screening and ranking pipeline to continue when the OpenAI API is unavailable or quota is exhausted.
+The `.env` file is excluded using `.gitignore`.
 
-## Running the Application
+### API Availability
 
-Activate the virtual environment and run:
+The application does not depend entirely on the OpenAI API.
 
-```powershell
-python app.py
-```
+If the API is unavailable, incorrectly configured, or the API quota is exhausted, the system automatically uses a rule-based reasoning fallback.
 
-The application automatically:
+This allows the core screening, scoring, ranking, and export pipeline to continue functioning.
 
-1. Loads the Job Description.
-2. Reads resumes from `data/sample_resumes/`.
-3. Extracts candidate information.
-4. Identifies required and matched skills.
-5. Calculates NLP similarity.
-6. Evaluates education compatibility.
-7. Evaluates experience compatibility.
-8. Evaluates project relevance.
-9. Calculates the final candidate score.
-10. Ranks candidates.
-11. Generates recruitment reasoning.
-12. Exports the results.
+---
 
 ## Input Data
 
 ### Job Description
 
-The Job Description is located at:
+The Job Description is stored at:
 
 ```text
 data/job_description.txt
 ```
 
-### Resumes
+### Candidate Resumes
 
 Candidate resumes are stored in:
 
@@ -179,181 +230,11 @@ Supported formats:
 
 The project includes 10+ sample resumes for batch screening and ranking.
 
-## Scoring Methodology
+---
 
-The final candidate score is calculated using the following weighted components:
+## How the Application Works
 
-| Evaluation Component |   Weight |
-| -------------------- | -------: |
-| Required Skill Match |      50% |
-| NLP Similarity       |      20% |
-| Education Match      |      15% |
-| Experience Match     |      10% |
-| Project Relevance    |       5% |
-| **Total**            | **100%** |
-
-### Required Skill Match
-
-The extracted candidate skills are compared with the required skills from the Job Description.
-
-The system identifies:
-
-* Matched skills
-* Missing skills
-* Skill match percentage
-
-### NLP Similarity
-
-TF-IDF vectorization and cosine similarity are used to measure textual similarity between the candidate's resume and the Job Description.
-
-### Education Match
-
-The candidate's educational background is evaluated against the educational requirements specified in the Job Description.
-
-### Experience Match
-
-Candidate experience is compared with the requirements of the role. Fresher candidates are supported when the Job Description permits entry-level applicants.
-
-### Project Relevance
-
-Candidate projects are evaluated using technical keywords relevant to the target role.
-
-### Final Score
-
-The individual scores are combined using the defined weights to produce a final suitability score between 0 and 100.
-
-## Candidate Ranking
-
-After calculating the final scores, candidates are sorted in descending order.
-
-The highest-scoring candidate receives Rank 1.
-
-Example:
-
-```text
-Rank 1 → Candidate A → 79.15
-Rank 2 → Candidate B → 78.41
-Rank 3 → Candidate C → 73.26
-```
-
-## AI Recruitment Reasoning
-
-The system supports two reasoning modes.
-
-### LLM-Based Reasoning
-
-When OpenAI API access is available, the system can generate a recruitment assessment based on:
-
-* Candidate score
-* Matched skills
-* Missing skills
-* Education
-* Experience
-* Project relevance
-* Job Description requirements
-
-### Rule-Based Fallback
-
-If the OpenAI API is unavailable or quota is exhausted, the system automatically generates a transparent rule-based assessment.
-
-The output identifies the reasoning source:
-
-```text
-llm
-```
-
-or:
-
-```text
-rule-based-fallback
-```
-
-This ensures the core screening pipeline remains functional without depending entirely on an external AI service.
-
-## Output
-
-The application generates two ranked result files:
-
-### CSV
-
-```text
-outputs/ranked_candidates.csv
-```
-
-### JSON
-
-```text
-outputs/ranked_candidates.json
-```
-
-Each result contains:
-
-* Candidate rank
-* Candidate name
-* Email
-* Resume filename
-* Final score
-* Skill score
-* NLP similarity score
-* Education score
-* Experience score
-* Project score
-* Matched skills
-* Missing skills
-* Reasoning source
-* Recruitment assessment
-
-## Example
-
-```text
-======================================================================
-FINAL RANKED CANDIDATES
-======================================================================
-
-#1 ARJUN SHARMA
-Score: 79.15/100
-
-Matched Skills:
-css, django, flask, git, html, javascript, python, rest api, sql
-
-Missing Skills:
-None
-
-Reasoning Source:
-rule-based-fallback
-
-RECRUITMENT ASSESSMENT:
-The candidate is a strong match for the
-Junior Python Developer role.
-```
-
-## Automated Testing
-
-The project includes automated tests using `pytest`.
-
-Run the test suite:
-
-```powershell
-python -m pytest
-```
-
-Current test status:
-
-```text
-7 passed
-```
-
-The test suite covers:
-
-* NLP similarity
-* Skill matching
-* Education scoring
-* Experience scoring
-* Project relevance
-* Final score validation
-* Candidate ranking
-
-## End-to-End Workflow
+The application follows an end-to-end screening pipeline:
 
 ```text
 Job Description
@@ -401,6 +282,214 @@ Recruitment Reasoning
  CSV + JSON Results
 ```
 
+---
+
+## Scoring Methodology
+
+The final candidate score is calculated using the following weighted components:
+
+| Evaluation Component |   Weight |
+| -------------------- | -------: |
+| Required Skill Match |      50% |
+| NLP Similarity       |      20% |
+| Education Match      |      15% |
+| Experience Match     |      10% |
+| Project Relevance    |       5% |
+| **Total**            | **100%** |
+
+### Required Skill Match
+
+The candidate's extracted skills are compared with the required skills from the Job Description.
+
+The system identifies:
+
+* Matched skills
+* Missing skills
+* Skill match percentage
+
+### NLP Similarity
+
+TF-IDF vectorization and cosine similarity are used to measure textual similarity between the resume and the Job Description.
+
+### Education Match
+
+The candidate's educational background is evaluated against the educational requirements specified in the Job Description.
+
+### Experience Match
+
+Candidate experience is compared with the requirements of the role.
+
+Fresher candidates are supported when the Job Description permits entry-level applicants.
+
+### Project Relevance
+
+Candidate projects are evaluated using technical keywords relevant to the target role.
+
+### Final Score
+
+The individual scores are combined according to the defined weights to produce a final suitability score between 0 and 100.
+
+---
+
+## Candidate Ranking
+
+Candidates are ranked in descending order based on their final suitability score.
+
+The highest-scoring candidate receives Rank 1.
+
+Example:
+
+```text
+Rank 1 → ARJUN SHARMA → 79.15
+Rank 2 → SNEHA KUMAR  → 78.41
+Rank 3 → PRIYA REDDY  → 73.26
+```
+
+---
+
+## AI Recruitment Reasoning
+
+The system supports two reasoning modes.
+
+### LLM-Based Reasoning
+
+When OpenAI API access is available, the system can generate a recruitment assessment based on:
+
+* Candidate score
+* Matched skills
+* Missing skills
+* Education
+* Experience
+* Project relevance
+* Job Description requirements
+
+The assessment provides:
+
+* Overall assessment
+* Key strengths
+* Missing or weak areas
+* Score explanation
+* Recommendation
+
+### Rule-Based Fallback
+
+If the OpenAI API is unavailable or the API quota is exhausted, the application automatically generates a rule-based recruitment assessment.
+
+The fallback uses:
+
+* Final score
+* Skill match
+* NLP similarity
+* Education match
+* Experience match
+* Project relevance
+* Matched skills
+* Missing skills
+
+The reasoning source is displayed as:
+
+```text
+llm
+```
+
+or:
+
+```text
+rule-based-fallback
+```
+
+---
+
+## Output
+
+The application generates two ranked result files.
+
+### CSV
+
+```text
+outputs/ranked_candidates.csv
+```
+
+### JSON
+
+```text
+outputs/ranked_candidates.json
+```
+
+Each candidate record contains:
+
+* Rank
+* Candidate name
+* Email
+* Resume filename
+* Final score
+* Skill score
+* NLP similarity score
+* Education score
+* Experience score
+* Project score
+* Matched skills
+* Missing skills
+* Reasoning source
+* Recruitment assessment
+
+---
+
+## Example Output
+
+```text
+======================================================================
+FINAL RANKED CANDIDATES
+======================================================================
+
+#1 ARJUN SHARMA
+Score: 79.15/100
+
+Matched Skills:
+css, django, flask, git, html, javascript, python, rest api, sql
+
+Missing Skills:
+None
+
+Reasoning Source:
+rule-based-fallback
+
+RECRUITMENT ASSESSMENT:
+
+The candidate is a strong match for the
+Junior Python Developer role.
+```
+
+---
+
+## Automated Testing
+
+The project includes an automated test suite using `pytest`.
+
+Run:
+
+```powershell
+python -m pytest
+```
+
+Current test result:
+
+```text
+7 passed
+```
+
+The test suite covers:
+
+* NLP similarity
+* Skill matching
+* Education scoring
+* Experience scoring
+* Project relevance
+* Final score validation
+* Candidate ranking
+
+---
+
 ## Design Decisions and Trade-offs
 
 ### TF-IDF Instead of Embeddings
@@ -411,20 +500,26 @@ Embedding-based semantic matching could provide stronger contextual understandin
 
 ### Weighted Scoring
 
-Required technical skills receive the highest weight because skill alignment is a primary factor in resume screening.
+Required technical skills receive the highest weight because technical skill alignment is a primary factor in resume screening.
 
 ### Rule-Based Fallback
 
-LLM-based reasoning depends on external API availability and quota. The fallback ensures that the screening and ranking workflow remains operational when the external service is unavailable.
+LLM-based reasoning depends on external API availability and quota.
+
+The fallback ensures that the core screening and ranking workflow remains operational when the external AI service is unavailable.
+
+---
 
 ## Limitations
 
 * Resume formatting can affect extraction accuracy.
 * Skill extraction relies on predefined matching logic.
-* TF-IDF similarity does not provide full semantic understanding.
+* TF-IDF similarity does not provide complete semantic understanding.
 * Project relevance is estimated using technical keyword matching.
 * The system is intended as a recruitment screening aid and should not replace human decision-making.
 * Sample resumes are intended for demonstration and testing.
+
+---
 
 ## Security Considerations
 
@@ -433,7 +528,9 @@ LLM-based reasoning depends on external API availability and quota. The fallback
 * API keys must never be committed to GitHub.
 * Confidential candidate information should not be uploaded to a public repository.
 
-## Project Status
+---
+
+## Testing Status
 
 | Component                     | Status     |
 | ----------------------------- | ---------- |
@@ -455,20 +552,26 @@ LLM-based reasoning depends on external API availability and quota. The fallback
 | Automated Testing             | 7/7 Passed |
 | Documentation                 | Complete   |
 
+---
+
+## Project Status
+
+The project is implemented as an end-to-end resume screening pipeline capable of processing multiple candidates, ranking them against a target Job Description, generating recruitment assessments, and exporting structured results.
+
+---
+
 ## License
 
 This project is intended for educational and demonstration purposes.
 
 ````
 
-### After replacing your README
+### After replacing the README
 
-Save it with **Ctrl + S**.
-
-Then run:
+Save it with **Ctrl + S**, then run:
 
 ```powershell
 git add README.md
-git commit -m "Add professional project documentation"
-git push
+git commit -m "Improve README documentation"
+git push origin main
 ````
